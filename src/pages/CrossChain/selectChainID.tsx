@@ -213,25 +213,18 @@ export default function SelectChainIdInputPanel({
               >
                 <Aligner>
                   <TokenLogoBox>
-                    <TokenLogo symbol={bridgeConfig?.symbol} logoUrl={bridgeConfig?.logoUrl} size={'24px'} />
+                    <TokenLogo symbol={bridgeConfig?.symbol} logoUrl={''} size={'24px'} />
                   </TokenLogoBox>
                   <StyledTokenName className="token-symbol-container" active={Boolean(bridgeConfig && bridgeConfig.symbol)}>
                     <h3>
                       {
-                        destChainInfo?.symbol ? (
-                          destChainInfo?.symbol.length > 20
-                            ? destChainInfo?.symbol.slice(0, 4) +
-                              '...' +
-                              destChainInfo?.symbol.slice(destChainInfo?.symbol.length - 5, destChainInfo?.symbol.length)
-                            : config.getBaseCoin(destChainInfo?.symbol, chainId)
-                        ) : t('selectToken')
+                        "PST"
                       }
                       {/* {selectChainId ? '-' + config.chainInfo[selectChainId].suffix : ''} */}
                     </h3>
                     <p>
-                      {
-                        destChainInfo ? config.getBaseCoin(destChainInfo?.symbol, selectChainId, 1, destChainInfo?.name) : ''
-                      }
+                      Pst Token
+                    
                     </p>
                   </StyledTokenName>
                   {!disableCurrencySelect && !!selectChainId && (

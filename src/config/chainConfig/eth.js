@@ -142,7 +142,7 @@ export default {
     explorer: ETH_MAIN_EXPLORER,
     symbol: symbol,
     name: 'Ethereum',
-    networkName: 'Arweave',
+    networkName: 'Arweave Testnet',
     type: 'main',
     label: ETH_MAIN_CHAINID,
     isSwitch: 1,

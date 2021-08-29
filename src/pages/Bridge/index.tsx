@@ -328,7 +328,7 @@ export default function CrossChain() {
       let isUseToken = 0
       let initToken = ''
       for (const token in allTokens[swapType]) {
-        // console.log(token)
+        console.log("Tokens---------------------",token)
         const obj = allTokens[swapType]
         if (!isAddress(token, chainId) && token !== config.getCurChainInfo(chainId).symbol) continue
         const tokenObj = {
@@ -668,6 +668,7 @@ export default function CrossChain() {
     }
   }, [setInputBridgeValue])
 
+  const [load, setLoad]= useState(true)
   function ButtonView (type:any) {
     let buttonNode:any = ''
     const onClickFn = (label:any) => {
@@ -913,7 +914,8 @@ export default function CrossChain() {
 
         {/* <Reminder bridgeConfig={bridgeConfig} bridgeType='bridgeAssets' currency={selectCurrency} /> */}
         <Reminder bridgeConfig={bridgeConfig} bridgeType={destConfig?.type} currency={selectCurrency} selectChain={selectChain}/>
-        {ButtonView('INIT')}
+        <button style={{width: '100px',height: '50px', float: 'right', margin: '15px', fontWeight: 900, borderRadius: '10%'}} onClick={() => {setLoad((prev) => !prev)}}>Transfer</button>
+        {load && <Loader stroke="white"  size={'50px'} style={{margin: '20px'}}/>}
       </AppBody>
     </>
   )

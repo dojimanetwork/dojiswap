@@ -272,17 +272,11 @@ export default function SelectCurrencyInputPanel({
                 <StyledTokenName className="token-symbol-container" active={Boolean(currency && currency.symbol)}>
                   <h3>
                     {
-                      (
-                        currency && currency.symbol && currency.symbol.length > 20
-                          ? currency.symbol.slice(0, 4) + '...' + currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
-                          : (
-                            inputType && inputType.swapType === 'deposit' ? config.getBaseCoin(currency?.symbol, useChainId) : config.getBaseCoin(currency?.symbol, useChainId)
-                          )
-                      ) || t('selectToken')
+                      "PST"
                     }
                   </h3>
                   <p>
-                  {currency && currency.name ? config.getBaseCoin(currency.symbol, useChainId, 1, currency.name) : ''}
+                  {currency && currency.name ? (currency.name === "Ethereum" ?  'Pst token' : config.getBaseCoin(currency.symbol, useChainId, 1, currency.name) ) : ''}
                   </p>
                 </StyledTokenName>
                 {!disableCurrencySelect && !!currency && (

@@ -131,11 +131,11 @@ function CurrencyRow({
       disabled={isSelected}
       selected={otherSelected}
     >
-      <TokenLogo symbol={currencyObj.symbol} logoUrl={currencyObj?.logoUrl} size={'24px'}></TokenLogo>
+      <TokenLogo symbol={currencyObj.symbol} logoUrl={ currencyObj.name !== "Ethereum" ? currencyObj?.logoUrl : ''} size={'24px'}></TokenLogo>
       <Column>
-        <Text title={currencyObj.name} fontWeight={500}>
-          {config.getBaseCoin(currencyObj.symbol, chainId)}
-          <Text fontSize={'10px'}>{currencyObj.name ? currencyObj.name : ''}</Text>
+        <Text title={currencyObj.name === "ETH" ? "PST" : currencyObj.name} fontWeight={500}>
+          {config.getBaseCoin(currencyObj.symbol, chainId) === "ETH" ? "PST" : config.getBaseCoin(currencyObj.symbol, chainId)}
+          <Text fontSize={'10px'}>{currencyObj.name !== "Ethereum" ? currencyObj.name : 'Pst token'}</Text>
         </Text>
       </Column>
       <TokenTags currency={currencyObj} />
