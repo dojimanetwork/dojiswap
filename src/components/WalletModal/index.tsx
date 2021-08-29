@@ -338,12 +338,6 @@ export default function WalletModal({
           ) : (
             <OptionGrid>{getOptions()}</OptionGrid>
           )}
-          {/* {walletView !== WALLET_VIEWS.PENDING && (
-            <Blurb>
-              <span>{t('NewToEthereum')} &nbsp;</span>{' '}
-              <ExternalLink href="https://ethereum.org/wallets/">{t('tip35')}</ExternalLink>
-            </Blurb>
-          )} */}
         </ContentWrapper>
       </UpperSection>
     )

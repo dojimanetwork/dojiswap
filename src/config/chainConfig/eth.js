@@ -65,8 +65,8 @@ export const tokenList = [
     "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
     "chainId": ETH_MAIN_CHAINID,
     "decimals": 18,
-    "name": "Dai Stablecoin",
-    "symbol": "DAI"
+    "name": "PST Token",
+    "symbol": "PST"
   },
 ]
 export const testTokenList = [
@@ -142,7 +142,7 @@ export default {
     explorer: ETH_MAIN_EXPLORER,
     symbol: symbol,
     name: 'Ethereum',
-    networkName: 'ETH mainnet',
+    networkName: 'Arweave',
     type: 'main',
     label: ETH_MAIN_CHAINID,
     isSwitch: 1,

@@ -3,7 +3,7 @@ import React from 'react'
 import { Text } from 'rebass'
 import styled from 'styled-components'
 
-import Logo from '../../assets/svg/logo.svg'
+// import Logo from '../../assets/svg/logo.svg'
 import LogoDark from '../../assets/svg/logo_white.svg'
 import IconDay from '../../assets/images/icon/day.svg'
 import IconNight from '../../assets/images/icon/night.svg'
@@ -117,6 +117,7 @@ const Title = styled.a`
   justify-self: flex-start;
   margin-right: 12px;
   height: 100%;
+  text-decoration: none;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     justify-self: center;
   `};
@@ -128,6 +129,7 @@ const Title = styled.a`
 const UniIcon = styled.div`
   ${({ theme }) => theme.flexSC};
   height: 100%;
+  
   // padding: 10px 0;
   // transition: transform 0.3s ease;
   // :hover {
@@ -149,6 +151,14 @@ const StyleDarkToggle = styled.div`
   }
 `
 
+
+const LogoTitle = styled.span<{active: boolean}>`
+  text-decoration: none;
+  color: ${({ active } ) => !active ? 'black' : 'white' };
+  padding-left: 1rem;
+  font-weight: bold;
+`
+
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   // const { t } = useTranslation()
@@ -161,7 +171,8 @@ export default function Header() {
       <HeaderRow>
         <Title href="/" target="__blank">
           <UniIcon>
-            <img height={'42px'} src={isDark ? LogoDark : Logo} alt="logo" />
+            <img height={'42px'} src={LogoDark} alt="logo" />
+            <LogoTitle active={isDark}>Dộjima</LogoTitle>
           </UniIcon>
         </Title>
       </HeaderRow>

@@ -16,6 +16,8 @@ import TransactionUpdater from './state/transactions/updater'
 import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
+import _ from 'arconnect'
+import Arweave from 'arweave'
 
 import { WalletProvider, NetworkInfo } from '@terra-money/wallet-provider'
 
@@ -41,6 +43,12 @@ const walletConnectChainIds: Record<number, NetworkInfo> = {
   0: testnet,
   1: mainnet,
 }
+
+export const arweave = Arweave.init({
+  host: 'localhost',
+  port: 1984,
+  protocol: 'http'
+})
 
 function Updaters() {
   return (

@@ -113,7 +113,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
 }
 
 // Default Ethereum chain tokens
-export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
+export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'PST', 'PST token')
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin')
 export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
 export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f5717214004A7f26888', 18, 'COMP', 'Compound')
@@ -123,7 +123,7 @@ export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C
 export const RUNE = new Token(ChainId.MAINNET, '0x3155BA85D5F96b2d030a4966AF206230e46849cb', 18, 'RUNE', 'RUNE.ETH')
 
 export const BSC: { [key: string]: Token } = {
-  DAI: new Token(ChainId.BNBMAIN, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.BNBMAIN, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'PST', 'PST Stablecoin'),
   USD: new Token(ChainId.BNBMAIN, '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', 18, 'BUSD', 'Binance USD'),
   USDC: new Token(ChainId.BNBMAIN, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', 18, 'USDC', 'USD Coin'),
   USDT: new Token(ChainId.BNBMAIN, '0x55d398326f99059fF775485246999027B3197955', 18, 'USDT', 'Tether USD'),
@@ -133,14 +133,14 @@ export const BSC: { [key: string]: Token } = {
 export const FANTOM: { [key: string]: Token } = {
   USDC: new Token(ChainId.FTMMAIN, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
   WBTC: new Token(ChainId.FTMMAIN, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
-  DAI: new Token(ChainId.FTMMAIN, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.FTMMAIN, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'PST', 'PST Stablecoin'),
   WETH: new Token(ChainId.FTMMAIN, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped Ether')
 }
 
 export const MATIC: { [key: string]: Token } = {
   USDC: new Token(ChainId.MATICMAIN, '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', 6, 'USDC', 'USD Coin'),
   WBTC: new Token(ChainId.MATICMAIN, '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6', 8, 'WBTC', 'Wrapped Bitcoin'),
-  DAI: new Token(ChainId.MATICMAIN, '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.MATICMAIN, '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', 18, 'DAI', 'PST Stablecoin'),
   WETH: new Token(ChainId.MATICMAIN, '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18, 'WETH', 'Wrapped Ether'),
   USDT: new Token(ChainId.MATICMAIN, '0xc2132D05D31c914a87C6611C10748AEb04B58e8F', 6, 'USDT', 'Tether USD'),
   TEL: new Token(ChainId.MATICMAIN, '0xdF7837DE1F2Fa4631D716CF2502f8b230F1dcc32', 2, 'TEL', 'Telcoin'),
@@ -154,7 +154,7 @@ export const MATIC: { [key: string]: Token } = {
 
 
 export const OKEX: { [key: string]: Token } = {
-  DAI: new Token(ChainId.OKEX, '0x21cDE7E32a6CAF4742d00d44B07279e7596d26B9', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.OKEX, '0x21cDE7E32a6CAF4742d00d44B07279e7596d26B9', 18, 'PST', 'PST Stablecoin'),
   USDC: new Token(ChainId.OKEX, '0xc946DAf81b08146B1C7A8Da2A851Ddf2B3EAaf85', 18, 'USDC', 'USD Coin'),
   USDT: new Token(ChainId.OKEX, '0x382bB369d343125BfB2117af9c149795C6C65C50', 18, 'USDT', 'Tether USD'),
   WBTC: new Token(ChainId.OKEX, '0x506f731F7656e2FB34b587B912808f2a7aB640BD', 18, 'WBTC', 'Wrapped Bitcoin'),
@@ -162,7 +162,7 @@ export const OKEX: { [key: string]: Token } = {
 }
 
 export const HECO: { [key: string]: Token } = {
-  DAI: new Token(ChainId.HTMAIN, '0x3D760a45D0887DFD89A2F5385a236B29Cb46ED2a', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.HTMAIN, '0x3D760a45D0887DFD89A2F5385a236B29Cb46ED2a', 18, 'PST', 'PST Stablecoin'),
   USDC: new Token(ChainId.HTMAIN, '0x9362Bbef4B8313A8Aa9f0c9808B80577Aa26B73B', 18, 'USDC', 'USD Coin'),
   USDT: new Token(ChainId.HTMAIN, '0xa71EdC38d189767582C38A3145b5873052c3e47a', 18, 'USDT', 'Tether USD'),
   WBTC: new Token(ChainId.HTMAIN, '0x66a79D23E58475D2738179Ca52cd0b41d73f0BEa', 18, 'WBTC', 'Wrapped Bitcoin'),
@@ -170,7 +170,7 @@ export const HECO: { [key: string]: Token } = {
 }
 
 export const HARMONY: { [key: string]: Token } = {
-  DAI: new Token(ChainId.HARMONY, '0xEf977d2f931C1978Db5F6747666fa1eACB0d0339', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.HARMONY, '0xEf977d2f931C1978Db5F6747666fa1eACB0d0339', 18, 'PST', 'PST Stablecoin'),
   USDC: new Token(ChainId.HARMONY, '0x985458E523dB3d53125813eD68c274899e9DfAb4', 6, 'USDC', 'USD Coin'),
   USDT: new Token(ChainId.HARMONY, '0x3C2B8Be99c50593081EAA2A724F0B8285F5aba8f', 6, 'USDT', 'Tether USD'),
   WBTC: new Token(ChainId.HARMONY, '0x3095c7557bCb296ccc6e363DE01b760bA031F2d9', 8, 'WBTC', 'Wrapped Bitcoin'),
@@ -185,7 +185,7 @@ export const XDAI: { [key: string]: Token } = {
 }
 
 export const AVALANCHE: { [key: string]: Token } = {
-  DAI: new Token(ChainId.AVALANCHE, '0xbA7dEebBFC5fA1100Fb055a87773e1E99Cd3507a', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.AVALANCHE, '0xbA7dEebBFC5fA1100Fb055a87773e1E99Cd3507a', 18, 'PST', 'PST Stablecoin'),
   USDT: new Token(ChainId.AVALANCHE, '0xde3A24028580884448a5397872046a019649b084', 6, 'USDT', 'Tether USD'),
   WBTC: new Token(ChainId.AVALANCHE, '0x408D4cD0ADb7ceBd1F1A1C33A0Ba2098E1295bAB', 8, 'WBTC', 'Wrapped Bitcoin'),
   WETH: new Token(ChainId.AVALANCHE, '0xf20d962a6c8f70c731bd838a3a388D7d48fA6e15', 18, 'WETH', 'Wrapped Ether'),

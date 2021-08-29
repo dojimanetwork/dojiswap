@@ -38,6 +38,7 @@
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.1.1",
     "ajv": "^6.12.3",
+    "arconnect": "^0.2.9",
     "cids": "^1.0.0",
     "copy-to-clipboard": "^3.2.0",
     "cross-env": "^7.0.2",
@@ -88,7 +89,7 @@
     "@walletconnect/web3-provider": "1.1.1-alpha.0"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "env-cmd -f .env node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "integration-test": "start-server-and-test 'serve build -l 3006' http://localhost:3006 'cypress run'"
@@ -118,6 +119,7 @@
     "@svgr/webpack": "4.3.3",
     "@terra-money/wallet-provider": "^1.2.4",
     "anyswap-sdk": "^3.0.9",
+    "arweave": "^1.10.16",
     "axios": "^0.21.1",
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
@@ -130,6 +132,7 @@
     "css-loader": "3.4.2",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
+    "env-cmd": "^10.1.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-loader": "3.0.3",
     "eslint-plugin-flowtype": "4.6.0",

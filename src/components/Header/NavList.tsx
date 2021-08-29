@@ -174,51 +174,51 @@ const Tabs = styled.div`
   `}
 `
 
-const MenuItem = styled(ExternalLink)`
-  ${({ theme }) => theme.flexSC};
-  width: 100%;
-  height: 2.5rem;
-  font-size: 0.75rem;
-  font-weight: normal;
-  color: #96989e;
-  border-bottom: none;
-  margin: 0;
-  padding: 0.0625rem 0.875rem;
-  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.06);
-  .icon {
-    ${({ theme }) => theme.flexC};
-    width: 38px;
-    height: 38px;
-    margin-right: 1rem;
-    .on {
-      display: none;
-    }
-    .off {
-      display: block;
-    }
-  }
-  .arrow {
-    position: absolute;
-    top: 0.875rem;
-    right: 1rem;
-  }
-  &:hover {
-    color: ${({ theme }) => theme.textColor};
-    font-weight: 600;
-    text-decoration: none;
-    .icon {
-      .on {
-        display: block;
-      }
-      .off {
-        display: none;
-      }
-    }
-  }
-  &:last-child {
-    border: none;
-  }
-`
+// const MenuItem = styled(ExternalLink)`
+//   ${({ theme }) => theme.flexSC};
+//   width: 100%;
+//   height: 2.5rem;
+//   font-size: 0.75rem;
+//   font-weight: normal;
+//   color: #96989e;
+//   border-bottom: none;
+//   margin: 0;
+//   padding: 0.0625rem 0.875rem;
+//   border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.06);
+//   .icon {
+//     ${({ theme }) => theme.flexC};
+//     width: 38px;
+//     height: 38px;
+//     margin-right: 1rem;
+//     .on {
+//       display: none;
+//     }
+//     .off {
+//       display: block;
+//     }
+//   }
+//   .arrow {
+//     position: absolute;
+//     top: 0.875rem;
+//     right: 1rem;
+//   }
+//   &:hover {
+//     color: ${({ theme }) => theme.textColor};
+//     font-weight: 600;
+//     text-decoration: none;
+//     .icon {
+//       .on {
+//         display: block;
+//       }
+//       .off {
+//         display: none;
+//       }
+//     }
+//   }
+//   &:last-child {
+//     border: none;
+//   }
+// `
 const OutLink = styled.div`
   padding-left: 44px;
   margin-top: 78px;
@@ -304,13 +304,7 @@ export default function NavList() {
   return (
     <>
       <HeaderLinks>
-        <StyledNavLink id={`dashboard-nav-link`} to={'/dashboard'}>
-          <div className="icon">
-            <img src={require('../../assets/images/icon/application.svg')} className="off" alt="" />
-            <img src={require('../../assets/images/icon/application-purpl.svg')} className="on" alt="" />
-          </div>
-          {t('dashboard')}
-        </StyledNavLink>
+
         {
           config.getCurConfigInfo().isOpenRouter ? (
             <StyledNavLink
@@ -382,16 +376,6 @@ export default function NavList() {
             </StyledNavLink>
           )
         }
-        <StyledNavLink
-          id={`swap-nav-link`}
-          to={'/farm'}
-        >
-          <div className="icon">
-            <img src={require('../../assets/images/icon/send.svg')} className="off" alt="" />
-            <img src={require('../../assets/images/icon/send-purpl.svg')} className="on" alt="" />
-          </div>
-          {t('farms')}
-        </StyledNavLink>
         {/* {
           config.getCurConfigInfo().isOpenRouter ? (
             <>
@@ -441,7 +425,7 @@ export default function NavList() {
           </div>
           {t('Markets')}
         </MenuItem> */}
-        <MenuItem id="link" href="https://vote.anyswap.exchange/">
+        {/* <MenuItem id="link" href="https://vote.anyswap.exchange/">
           <div className="icon">
             <img src={require('../../assets/images/icon/any.svg')} className="off" alt="" />
             <img src={require('../../assets/images/icon/any-purpl.svg')} className="on" alt="" />
@@ -468,7 +452,7 @@ export default function NavList() {
             <img src={require('../../assets/images/icon/bridge.svg')} className="on" alt="" />
           </div>
           {t('Listing')}
-        </MenuItem>
+        </MenuItem> */}
       </Tabs>
       <OutLink>
         <OutLinkImgBox>
@@ -511,9 +495,9 @@ export default function NavList() {
         </OutLinkImgBox>
         <CopyRightBox>
           <h5>
-            Powered by <span>Fusion DCRM</span>
+            Powered by <span>Dộjima Network</span>
           </h5>
-          <p>© 2020 Anyswap. All rights reserved.</p>
+          <p>© 2020 Dộjima. All rights reserved.</p>
         </CopyRightBox>
       </OutLink>
     </>
