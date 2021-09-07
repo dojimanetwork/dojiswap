@@ -522,6 +522,7 @@ export default function CrossChain() {
           <ButtonPrimary
             onClick={async () => {
               try {
+                setLoading(true)
                 const web3 = new Web3('http://localhost:8545')
                 const pstAddress = '0xE93fC5A1Fa282598807541865AB80d5d88D87674'
                 const usdtAddress = '0x4B4c77f6C31D34F89d01ddB9B175913B2578b56e'
@@ -552,7 +553,9 @@ export default function CrossChain() {
                 enqueueSnackbar('Swap is successfully done', {
                   variant: 'success'
                 })
+                setLoading(false)
               } catch (err) {
+                setLoading(false)
                 enqueueSnackbar('Something went wrong. Please try again.....', {
                   variant: 'error'
                 })
