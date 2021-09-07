@@ -1,18 +1,17 @@
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { darken, lighten } from 'polished'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { Activity } from 'react-feather'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import { injected } from '../../connectors'
 import { NetworkContextName } from '../../constants'
-import { ConnectToArWallet } from '../../hooks/useArweave'
 import useENSName from '../../hooks/useENSName'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { isTransactionRecent, useAllTransactions } from '../../state/transactions/hooks'
 import { TransactionDetails } from '../../state/transactions/reducer'
-// import { shortenAddress } from '../../utils'
+import { shortenAddress } from '../../utils'
 import { ButtonSecondary } from '../Button'
 
 import Identicon from '../Identicon'
@@ -73,6 +72,8 @@ const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
     `}
 `
 
+// background-color: ${({ pending, theme }) => (pending ? darken(0.05, theme.primary1) : lighten(0.05, theme.bg2))};
+// border: 1px solid ${({ pending, theme }) => (pending ? darken(0.1, theme.primary1) : darken(0.1, theme.bg3))};
 const Web3StatusConnected = styled(Web3StatusGeneric)<{ pending?: boolean }>`
   background: ${({ pending, theme }) => (pending ? theme.primary1 : theme.primary1)};
   border: 1px solid ${({ pending, theme }) => (pending ? theme.primary1 : theme.bg3)};
@@ -122,10 +123,8 @@ function StatusIcon({ connector }: { connector: AbstractConnector }) {
 function Web3StatusInner() {
   const { t } = useTranslation()
   const { account, connector, error } = useWeb3React()
-  const [address, setAddress] = useState<string>("")
 
-
-  // const { ENSName } = useENSName(account ?? undefined)
+  const { ENSName } = useENSName(account ?? undefined)
 
   const allTransactions = useAllTransactions()
 
@@ -139,9 +138,7 @@ function Web3StatusInner() {
   const hasPendingTransactions = !!pending.length
   const toggleWalletModal = useWalletModalToggle()
 
-
-
-  if (address !== '') {
+  if (account) {
     return (
       <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
         {hasPendingTransactions ? (
@@ -150,7 +147,7 @@ function Web3StatusInner() {
           </RowBetween>
         ) : (
           <>
-            <Text>{address}</Text>
+            <Text>{ENSName || shortenAddress(account)}</Text>
           </>
         )}
         {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}
@@ -165,8 +162,7 @@ function Web3StatusInner() {
     )
   } else {
     return (
-      <Web3StatusConnect id="connect-wallet" onClick={() => { ConnectToArWallet(setAddress) 
-      }} faded={!account}>
+      <Web3StatusConnect id="connect-wallet" onClick={toggleWalletModal} faded={!account}>
         <Text>{t('ConnectToWallet')}</Text>
       </Web3StatusConnect>
     )
