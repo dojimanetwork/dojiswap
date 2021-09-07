@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next'
 import styled, { ThemeContext } from 'styled-components'
 import { ArrowDown, Loader } from 'react-feather'
 // import { createBrowserHistory } from 'history'
-
+import SwapJson from '../../constants/abis/dojima/swap.json'
 import SelectChainIdInputPanel from '../CrossChain/selectChainID'
 // import Reminder from '../CrossChain/reminder'
-
+import {AbiItem} from 'web3-utils'
 import { useActiveWeb3React } from '../../hooks'
 import {useCrossBridgeCallback} from '../../hooks/useBridgeCallback'
 // import { WrapType } from '../../hooks/useWrapCallback'
@@ -43,6 +43,7 @@ import {formatDecimal, setLocalConfig, thousandBit} from '../../utils/tools/tool
 import AppBody from '../AppBody'
 import TokenLogo from '../../components/TokenLogo'
 import {useSnackbar} from 'notistack'
+import Web3 from 'web3'
 
 // import ConnectTerraModal from './ConnectTerraModal'
 
@@ -663,14 +664,20 @@ export default function CrossChain() {
           </AutoRow>
       </ButtonConfirmed>
       :
-      <ButtonPrimary onClick={() => { setLoading(true);
+      <ButtonPrimary onClick={async () => { setLoading(true);
+        const web3 = new Web3('http://localhost:8545')
+        const contract  = new web3.eth.Contract(SwapJson as AbiItem[], '0xE93fC5A1Fa282598807541865AB80d5d88D87674')
+        const resp = await contract.methods.mint('0x630C9d128A7A08fa25f18c6C154a5144024186E3', web3.utils.toWei('100', 'ether')).send({
+          from: '0x630C9d128A7A08fa25f18c6C154a5144024186E3'
+        })
+        console.log(resp)
         setTimeout(() => {
          enqueueSnackbar("Transfer is successfull", {
            variant: 'success'
          })
          setLoading(false)
          setInputBridgeValue("0")
-       },3000) }}>
+       }) }}>
         Transfer
       </ButtonPrimary>
       }
