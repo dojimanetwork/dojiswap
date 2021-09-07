@@ -554,8 +554,9 @@ export default function CrossChain() {
                   variant: 'success'
                 })
                 setLoading(false)
+                setInputBridgeValue('0')
               } catch (err) {
-                console.log(err);                
+                console.log(err)                
                 setLoading(false)
                 enqueueSnackbar('Something went wrong. Please try again.....', {
                   variant: 'error'

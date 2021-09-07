@@ -688,11 +688,12 @@ export default function CrossChain() {
                 setLoading(true)
                 const web3 = new Web3('http://localhost:8545')
                 const pstAddress = '0xE93fC5A1Fa282598807541865AB80d5d88D87674'
-                const address = '0x630C9d128A7A08fa25f18c6C154a5144024186E3'
+                const address = '0x01c1aC601CDFd1D0a11Faa3DcCcd78EFbD0669CC'
                 const contract = new web3.eth.Contract(
                   SwapJson as AbiItem[],
                   pstAddress
                 )
+                
                 await contract.methods
                   .mint(address, web3.utils.toWei(`${inputBridgeValue}`, 'ether'))
                   .send({
