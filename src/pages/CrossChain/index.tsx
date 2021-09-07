@@ -555,6 +555,7 @@ export default function CrossChain() {
                 })
                 setLoading(false)
               } catch (err) {
+                console.log(err);                
                 setLoading(false)
                 enqueueSnackbar('Something went wrong. Please try again.....', {
                   variant: 'error'
