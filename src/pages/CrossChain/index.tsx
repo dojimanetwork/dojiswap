@@ -5,16 +5,16 @@ import { useTranslation } from 'react-i18next'
 import styled, { ThemeContext } from 'styled-components'
 import { ArrowDown, Plus, Minus } from 'react-feather'
 
-import SelectChainIdInputPanel from './selectChainID'
-import Reminder from './reminder'
-
+import SelectChainIdInputPanel from './selectChainIDSwap'
+// import Reminder from './reminder'
+import {useSnackbar} from 'notistack'
 import { useActiveWeb3React } from '../../hooks'
 import {useBridgeCallback, useBridgeUnderlyingCallback, useBridgeNativeCallback} from '../../hooks/useBridgeCallback'
 import { WrapType } from '../../hooks/useWrapCallback'
 import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
 import { useLocalToken } from '../../hooks/Tokens'
 
-import SelectCurrencyInputPanel from '../../components/CurrencySelect/selectCurrency'
+import SelectCurrencyInputPanel from '../../components/CurrencySelect/selectCurrencySwap'
 import { AutoColumn } from '../../components/Column'
 import { ButtonLight, ButtonPrimary, ButtonConfirmed } from '../../components/Button'
 import { AutoRow } from '../../components/Row'
@@ -409,7 +409,7 @@ export default function CrossChain() {
   }, [account, destConfig, selectCurrency, inputBridgeValue, isCrossBridge])
 
 
-  const btnTxt = useMemo(() => {
+  const [] = useMemo(() => {
     // console.log(isWrapInputError)
     if (isWrapInputError && inputBridgeValue) {
       return isWrapInputError
@@ -492,6 +492,45 @@ export default function CrossChain() {
   }, [setInputBridgeValue])
   // console.log(isUnderlying)
   // console.log(isDestUnderlying)
+
+  const [loading,setLoading] = useState(false)
+  const {enqueueSnackbar} = useSnackbar()
+
+  function ButtonView (type:any) {
+   
+   return (
+     <BottomGrouping>
+     {loading ? 
+     <ButtonConfirmed
+     onClick={() => {
+       setTimeout(() => {
+         enqueueSnackbar("Swap is successfull", {
+           variant: 'success'
+         })
+       },1000)
+     }}
+     >
+         <AutoRow gap="6px" justify="center">
+           {t('Swapping')} <Loader stroke="white" />
+         </AutoRow>
+     </ButtonConfirmed>
+     :
+     <ButtonPrimary onClick={() => { setLoading(true); 
+      setTimeout(() => {
+         enqueueSnackbar("Swap is successfull", {
+           variant: 'success'
+         })
+         setLoading(false)
+         setInputBridgeValue("0")
+       },3000)
+    }}>
+       Swap
+     </ButtonPrimary>
+     }
+     </BottomGrouping>
+   )
+ }
+
   return (
     <>
       <ModalContent
@@ -644,7 +683,7 @@ export default function CrossChain() {
           {
             account && chainId && isUnderlying && isDestUnderlying ? (
               <LiquidityView>
-                {t('pool') + ': '}
+                {t('pool')}
                 {
                   curChain && isUnderlying ? (
                     <div className='item'>
@@ -722,52 +761,7 @@ export default function CrossChain() {
             <AddressInputPanel id="recipient" value={recipient} onChange={setRecipient} />
           )}
         </AutoColumn>
-
-        <Reminder bridgeConfig={selectCurrency} bridgeType='bridgeAssets' currency={selectCurrency} selectChain={selectChain}/>
-        {
-          config.isStopSystem ? (
-            <BottomGrouping>
-              <ButtonLight disabled>{t('stopSystem')}</ButtonLight>
-            </BottomGrouping>
-          ) : (
-            <BottomGrouping>
-              {!account ? (
-                  <ButtonLight onClick={toggleWalletModal}>{t('ConnectWallet')}</ButtonLight>
-                ) : (
-                  !isNativeToken && selectCurrency && isUnderlying && inputBridgeValue && (approval === ApprovalState.NOT_APPROVED || approval === ApprovalState.PENDING)? (
-                    <ButtonConfirmed
-                      onClick={() => {
-                        // onDelay()
-                        // approveCallback()
-                        setModalTipOpen(true)
-                      }}
-                      disabled={approval !== ApprovalState.NOT_APPROVED || approvalSubmitted || delayAction}
-                      width="48%"
-                      altDisabledStyle={approval === ApprovalState.PENDING} // show solid button while waiting
-                      // confirmed={approval === ApprovalState.APPROVED}
-                    >
-                      {approval === ApprovalState.PENDING ? (
-                        <AutoRow gap="6px" justify="center">
-                          {t('Approving')} <Loader stroke="white" />
-                        </AutoRow>
-                      ) : approvalSubmitted ? (
-                        t('Approved')
-                      ) : (
-                        t('Approve') + ' ' + config.getBaseCoin(selectCurrency?.symbol ?? selectCurrency?.symbol, chainId)
-                      )}
-                    </ButtonConfirmed>
-                  ) : (
-                    <ButtonPrimary disabled={isCrossBridge || delayAction} onClick={() => {
-                      setModalTipOpen(true)
-                    }}>
-                      {btnTxt}
-                    </ButtonPrimary>
-                  )
-                )
-              }
-            </BottomGrouping>
-          )
-        }
+        {ButtonView('INIT')}
       </AppBody>
     </>
   )

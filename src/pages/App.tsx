@@ -25,6 +25,7 @@ import ETHtestfarming from './Farms/ETH_test_farming'
 import FarmList from './Farms/FarmsList'
 
 import config from '../config'
+import { SnackbarProvider } from 'notistack'
 
 const AppWrapper = styled.div`
   // display: flex;
@@ -123,6 +124,7 @@ export default function App() {
     <Suspense fallback={null}>
       {/* <Route component={GoogleAnalyticsReporter} /> */}
       {/* <Route component={DarkModeQueryParamReader} /> */}
+      <SnackbarProvider>
       <AppWrapper>
         {/* <URLWarning /> */}
         <HeaderWrapper>
@@ -167,7 +169,9 @@ export default function App() {
             <NavList />
           </NavBottom>
         </BodyWrapper>
+        
       </AppWrapper>
+      </SnackbarProvider>
     </Suspense>
   )
 }

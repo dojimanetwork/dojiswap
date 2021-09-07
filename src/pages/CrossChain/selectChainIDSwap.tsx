@@ -12,7 +12,6 @@ import { PaddedColumn, Separator } from '../../components/SearchModal/styleds'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import TokenLogo from '../../components/TokenLogo'
 import Modal from '../../components/Modal'
-// import ArweaveLogo from '../../assets/images/coin/source/ARWEAVE.svg'
 // import { MenuItem } from '../../components/SearchModal/styleds'
 import {
   OptionCardClickable,
@@ -207,17 +206,17 @@ export default function SelectChainIdInputPanel({
               >
                 <Aligner>
                   <TokenLogoBox>
-                    <TokenLogo symbol={'ARWEAVE'} imgPath={require('../../assets/images/coin/source/ARWEAVE.svg')} logoUrl={''} size={'24px'} />
+                    <TokenLogo symbol={bridgeConfig?.symbol} logoUrl={''} size={'24px'} />
                   </TokenLogoBox>
                   <StyledTokenName className="token-symbol-container" active={Boolean(bridgeConfig && bridgeConfig.symbol)}>
                     <h3>
                       {
-                        "PST"
+                        "USDT"
                       }
                       {/* {selectChainId ? '-' + config.chainInfo[selectChainId].suffix : ''} */}
                     </h3>
                     <p>
-                      Pst Token
+                      USDT Token
                     </p>
                   </StyledTokenName>
                 </Aligner>
@@ -229,7 +228,7 @@ export default function SelectChainIdInputPanel({
               >
                 <Aligner>
                   <TokenLogoBox>
-                    <TokenLogo symbol={selectChainId ? (config.getCurChainInfo(selectChainId)?.networkLogo ?? config.getCurChainInfo(selectChainId)?.symbol) : ''} size={'24px'} />
+                    <TokenLogo imgPath={require('../../assets/images/coin/source/DOJIMA.svg')} symbol={selectChainId ? (config.getCurChainInfo(selectChainId)?.networkLogo ?? config.getCurChainInfo(selectChainId)?.symbol) : ''} size={'24px'} />
                   </TokenLogoBox>
                   <StyledTokenName className="token-symbol-container" active={Boolean(selectChainId)}>
                     {"Dojima Testnet"}

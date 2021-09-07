@@ -173,7 +173,7 @@ export default {
     explorer: HT_MAIN_EXPLORER,
     symbol: symbol,
     name: 'Huobi',
-    networkName: 'Heco mainnet',
+    networkName: 'Dojima Testnet',
     type: 'main',
     label: HT_MAIN_CHAINID,
     isSwitch: 1,

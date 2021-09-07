@@ -15,7 +15,7 @@ import { useETHBalances } from '../../state/wallet/hooks'
 // import Row, { RowFixed } from '../Row'
 import { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
-import SelectNetwork from './SelectNetwork'
+// import SelectNetwork from './SelectNetwork'
 // import usePrevious from '../../hooks/usePrevious'
 import config from '../../config'
 
@@ -178,7 +178,7 @@ export default function Header() {
       </HeaderRow>
       <HeaderControls>
         <HeaderElement>
-          <SelectNetwork />
+          {/* <SelectNetwork /> */}
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>

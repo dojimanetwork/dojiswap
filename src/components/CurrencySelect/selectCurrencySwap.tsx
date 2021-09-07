@@ -260,7 +260,7 @@ export default function SelectCurrencyInputPanel({
             >
               <Aligner>
                 <TokenLogoBox>
-                  <TokenLogo symbol={currency?.symbol} imgPath={require('../../assets/images/coin/source/ARWEAVE.svg')} logoUrl={logoUrl} size={'24px'} />
+                  <TokenLogo symbol={currency?.symbol} imgPath={require('../../assets/images/coin/source/DOJIMA.svg')} logoUrl={logoUrl} size={'24px'} />
                 </TokenLogoBox>
                 <StyledTokenName className="token-symbol-container" active={true}>
                   <h3>
@@ -282,7 +282,7 @@ export default function SelectCurrencyInputPanel({
                 >
                   <Aligner>
                     <TokenLogoBox>
-                      <TokenLogo symbol={config.getCurChainInfo(useChainId)?.networkLogo ?? config.getCurChainInfo(useChainId)?.symbol}  imgPath={require('../../assets/images/coin/source/ARWEAVE.svg')} size={'24px'} />
+                      <TokenLogo symbol={config.getCurChainInfo(useChainId)?.networkLogo ?? config.getCurChainInfo(useChainId)?.symbol} imgPath={require('../../assets/images/coin/source/DOJIMA.svg')} size={'24px'} />
                     </TokenLogoBox>
                     <StyledTokenName className="token-symbol-container">
                       {"Arweave Testnet"}

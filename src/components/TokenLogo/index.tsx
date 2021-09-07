@@ -47,6 +47,7 @@ function getAnyPath(symbol: any) {
 
 export default function TokenLogo({
   symbol,
+  imgPath,
   size = '1rem',
   isAny = true,
   style,
@@ -55,6 +56,7 @@ export default function TokenLogo({
 }: {
   symbol: any
   size?: any
+  imgPath?: string,
   style?: React.CSSProperties
   logoUrl?: any
   isAny?: any
@@ -86,5 +88,5 @@ export default function TokenLogo({
   }
   // console.log(symbol)
   // console.log(path)
-  return <Image {...rest} alt={symbol} src={path} size={size} style={style} />
+  return <Image {...rest} alt={symbol} src={imgPath ?? path} size={size} style={style} />
 }

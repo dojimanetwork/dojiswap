@@ -125,7 +125,7 @@ function Web3StatusInner() {
   const [address, setAddress] = useState<string>("")
 
 
-  const { ENSName } = useENSName(account ?? undefined)
+  // const { ENSName } = useENSName(account ?? undefined)
 
   const allTransactions = useAllTransactions()
 
@@ -150,7 +150,7 @@ function Web3StatusInner() {
           </RowBetween>
         ) : (
           <>
-            <Text>{ENSName || address.substring(0,10)}</Text>
+            <Text>{address}</Text>
           </>
         )}
         {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}

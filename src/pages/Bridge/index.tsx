@@ -3,23 +3,23 @@ import React, { useEffect, useState, useContext, useMemo, useCallback } from 're
 import {GetTokenListByChainID, createAddress, isAddress} from 'multichain-bridge'
 import { useTranslation } from 'react-i18next'
 import styled, { ThemeContext } from 'styled-components'
-import { ArrowDown } from 'react-feather'
+import { ArrowDown, Loader } from 'react-feather'
 // import { createBrowserHistory } from 'history'
 
 import SelectChainIdInputPanel from '../CrossChain/selectChainID'
-import Reminder from '../CrossChain/reminder'
+// import Reminder from '../CrossChain/reminder'
 
 import { useActiveWeb3React } from '../../hooks'
-import {useCrossBridgeCallback, useTerraCrossBridgeCallback} from '../../hooks/useBridgeCallback'
-import { WrapType } from '../../hooks/useWrapCallback'
+import {useCrossBridgeCallback} from '../../hooks/useBridgeCallback'
+// import { WrapType } from '../../hooks/useWrapCallback'
 import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
 import { useLocalToken } from '../../hooks/Tokens'
 
 import SelectCurrencyInputPanel from '../../components/CurrencySelect/selectCurrency'
 import { AutoColumn } from '../../components/Column'
-import { ButtonLight, ButtonPrimary, ButtonConfirmed } from '../../components/Button'
+import { ButtonConfirmed, ButtonLight, ButtonPrimary } from '../../components/Button'
 import { AutoRow } from '../../components/Row'
-import Loader from '../../components/Loader'
+// import Loader from '../../components/Loader'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import { ArrowWrapper, BottomGrouping } from '../../components/swap/styleds'
 import Title from '../../components/Title'
@@ -27,7 +27,7 @@ import ModalContent from '../../components/Modal/ModalContent'
 import QRcode from '../../components/QRcode'
 
 // import { useWalletModalToggle, useToggleNetworkModal } from '../../state/application/hooks'
-import { useWalletModalToggle } from '../../state/application/hooks'
+// import { useWalletModalToggle } from '../../state/application/hooks'
 import { tryParseAmount } from '../../state/swap/hooks'
 import { useBridgeAllTokenBalances } from '../../state/wallet/hooks'
 
@@ -42,8 +42,9 @@ import {formatDecimal, setLocalConfig, thousandBit} from '../../utils/tools/tool
 
 import AppBody from '../AppBody'
 import TokenLogo from '../../components/TokenLogo'
+import {useSnackbar} from 'notistack'
 
-import ConnectTerraModal from './ConnectTerraModal'
+// import ConnectTerraModal from './ConnectTerraModal'
 
 // const provider = getProvider()
 // provider.send('eth_requestAccounts', []).then((res:any) => {
@@ -167,7 +168,6 @@ export default function CrossChain() {
   // const toggleNetworkModal = useToggleNetworkModal()
   // const history = createBrowserHistory()
   const theme = useContext(ThemeContext)
-  const toggleWalletModal = useWalletModalToggle()
   const allBalances = useBridgeAllTokenBalances(BRIDGETYPE, chainId)
   // console.log(balances)
   const localSelectChain:any = sessionStorage.getItem(SelectBridgeChainIdLabel) ? sessionStorage.getItem(SelectBridgeChainIdLabel) : ''
@@ -192,8 +192,6 @@ export default function CrossChain() {
   // const [bridgeConfig, setBridgeConfig] = useState<any>()
 
   const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
-
-  const [delayAction, setDelayAction] = useState<boolean>(false)
 
   const [allTokens, setAllTokens] = useState<any>({})
   const [p2pAddress, setP2pAddress] = useState<any>('')
@@ -222,7 +220,7 @@ export default function CrossChain() {
     } : selectCurrency)
   // const formatInputBridgeValue = inputBridgeValue && Number(inputBridgeValue) ? tryParseAmount(inputBridgeValue, formatCurrency ?? undefined) : ''
   const formatInputBridgeValue = tryParseAmount(inputBridgeValue, formatCurrency ?? undefined)
-  const [approval, approveCallback] = useApproveCallback(formatInputBridgeValue ?? undefined, selectCurrency?.address)
+  const [approval] = useApproveCallback(formatInputBridgeValue ?? undefined, selectCurrency?.address)
 
   useEffect(() => {
     if (approval === ApprovalState.PENDING) {
@@ -231,7 +229,7 @@ export default function CrossChain() {
   }, [approval, approvalSubmitted])
 
   // console.log(selectCurrency)
-
+/* 
   function onDelay () {
     setDelayAction(true)
   }
@@ -240,7 +238,7 @@ export default function CrossChain() {
     setModalTipOpen(false)
     setModalSpecOpen(false)
     setInputBridgeValue('')
-  }
+  } */
 
   function changeNetwork (chainID:any) {
     selectNetwork(chainID).then((res: any) => {
@@ -460,7 +458,7 @@ export default function CrossChain() {
   // console.log(selectCurrency)
   // console.log(swapType)
   
-  const { wrapType, execute: onWrap, inputError: wrapInputError } = useCrossBridgeCallback(
+  const { inputError: wrapInputError } = useCrossBridgeCallback(
     formatCurrency ? formatCurrency : undefined,
     destConfig?.type === 'swapin' ? destConfig.DepositAddress : recipient,
     inputBridgeValue,
@@ -469,14 +467,14 @@ export default function CrossChain() {
     selectCurrency?.address,
     // destConfig?.pairid
   )
-  const { wrapType: wrapTerraType, execute: onTerraWrap } = useTerraCrossBridgeCallback(
+  /* const { wrapType: wrapTerraType, execute: onTerraWrap } = useTerraCrossBridgeCallback(
     formatCurrency ? formatCurrency : undefined,
     destConfig.DepositAddress,
     inputBridgeValue,
     selectChain,
     selectCurrency?.address,
     destConfig?.pairid
-  )
+  ) */
   
   
   const outputBridgeValue = useMemo(() => {
@@ -555,26 +553,7 @@ export default function CrossChain() {
   }, [account, destConfig, selectCurrency, inputBridgeValue, isCrossBridge])
 
 
-  const btnTxt = useMemo(() => {
-    // console.log(isWrapInputError)
-    if (isWrapInputError && inputBridgeValue && swapType !== BridgeType.deposit) {
-      return isWrapInputError
-    } else if (
-      destConfig
-      && inputBridgeValue
-      && (
-        Number(inputBridgeValue) < Number(destConfig.MinimumSwap)
-        || Number(inputBridgeValue) > Number(destConfig.MaximumSwap)
-      )
-    ) {
-      return t('ExceedLimit')
-    } else if (isDestUnderlying && Number(inputBridgeValue) > Number(destChain.ts)) {
-      return t('nodestlr')
-    } else if (wrapType === WrapType.WRAP) {
-      return t('swap')
-    }
-    return t('swap')
-  }, [t, isWrapInputError, inputBridgeValue, swapType])
+
 
   // useEffect(() => {
   //   if (!chainId) {
@@ -668,76 +647,33 @@ export default function CrossChain() {
     }
   }, [setInputBridgeValue])
 
-  const [load, setLoad]= useState(true)
+  const [loading,setLoading] = useState(false)
+  const {enqueueSnackbar} = useSnackbar()
+
   function ButtonView (type:any) {
-    let buttonNode:any = ''
-    const onClickFn = (label:any) => {
-      if (label === 'INIT') {
-        if (swapType !== BridgeType.deposit) {
-          setModalTipOpen(true)
-        } else {
-          setModalSpecOpen(true)
-        }
-      } else if (label === 'APPROVE') {
-        onDelay()
-        approveCallback().then(() => {
-          onClear()
-        })
-      } else if (label === 'SWAP') {
-        onDelay()
-        if (onWrap && swapType !== BridgeType.deposit) onWrap().then(() => {
-          onClear()
-        })
-        if (onTerraWrap && swapType === BridgeType.deposit && wrapTerraType === WrapType.WRAP) onTerraWrap().then(() => {
-          onClear()
-        })
-      }
-    }
-    if (!account) {
-      buttonNode = <ButtonLight onClick={toggleWalletModal}>{t('ConnectWallet')}</ButtonLight>
-    } else if (
-      !isNativeToken
-      && selectCurrency
-      && selectCurrency.underlying
-      && selectCurrency.underlying.isApprove
-      && inputBridgeValue
-      && (approval === ApprovalState.NOT_APPROVED || approval === ApprovalState.PENDING)
-    ) {
-      buttonNode = <ButtonConfirmed
-        onClick={() => {
-          onClickFn(type === 'INIT' ? 'INIT' : 'APPROVE')
-        }}
-        disabled={approval !== ApprovalState.NOT_APPROVED || approvalSubmitted || delayAction}
-        width="48%"
-        altDisabledStyle={approval === ApprovalState.PENDING} // show solid button while waiting
-        // confirmed={approval === ApprovalState.APPROVED}
+   
+    return (
+      <BottomGrouping>
+      {loading ? 
+      <ButtonConfirmed
+      onClick={() => setLoading(false)}
       >
-        {approval === ApprovalState.PENDING ? (
           <AutoRow gap="6px" justify="center">
             {t('Approving')} <Loader stroke="white" />
           </AutoRow>
-        ) : approvalSubmitted ? (
-          t('Approved')
-        ) : (
-          t('Approve') + ' ' + config.getBaseCoin(selectCurrency?.underlying?.symbol ?? selectCurrency?.symbol, chainId)
-        )}
       </ButtonConfirmed>
-    } else if (
-      swapType === BridgeType.deposit
-      && selectCurrency?.specChainId === 'TERRA'
-      && wrapTerraType === WrapType.NOCONNECT
-    ) {
-      buttonNode = <ConnectTerraModal />
-    } else {
-      buttonNode = <ButtonPrimary disabled={isCrossBridge || delayAction} onClick={() => {
-        onClickFn(type === 'INIT' ? 'INIT' : 'SWAP')
-      }}>
-        {btnTxt}
+      :
+      <ButtonPrimary onClick={() => { setLoading(true);
+        setTimeout(() => {
+         enqueueSnackbar("Transfer is successfull", {
+           variant: 'success'
+         })
+         setLoading(false)
+         setInputBridgeValue("0")
+       },3000) }}>
+        Transfer
       </ButtonPrimary>
-    }
-    return (
-      <BottomGrouping>
-        {buttonNode}
+      }
       </BottomGrouping>
     )
   }
@@ -849,7 +785,7 @@ export default function CrossChain() {
           {
             account && chainId && isUnderlying && isDestUnderlying ? (
               <LiquidityView>
-                {t('pool') + ': '}
+                {t('pool')}
                 {
                   curChain && isUnderlying ? (
                     <div className='item'>
@@ -911,11 +847,7 @@ export default function CrossChain() {
             p2pAddress ? <AddressInputPanel id="p2pAddress" value={p2pAddress} disabledInput={true} /> : ''
           }
         </AutoColumn>
-
-        {/* <Reminder bridgeConfig={bridgeConfig} bridgeType='bridgeAssets' currency={selectCurrency} /> */}
-        <Reminder bridgeConfig={bridgeConfig} bridgeType={destConfig?.type} currency={selectCurrency} selectChain={selectChain}/>
-        <button style={{width: '100px',height: '50px', float: 'right', margin: '15px', fontWeight: 900, borderRadius: '10%'}} onClick={() => {setLoad((prev) => !prev)}}>Transfer</button>
-        {load && <Loader stroke="white"  size={'50px'} style={{margin: '20px'}}/>}
+        {ButtonView('INIT')}
       </AppBody>
     </>
   )
