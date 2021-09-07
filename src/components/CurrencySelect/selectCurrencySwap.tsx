@@ -285,7 +285,7 @@ export default function SelectCurrencyInputPanel({
                       <TokenLogo symbol={config.getCurChainInfo(useChainId)?.networkLogo ?? config.getCurChainInfo(useChainId)?.symbol} imgPath={require('../../assets/images/coin/source/DOJIMA.svg')} size={'24px'} />
                     </TokenLogoBox>
                     <StyledTokenName className="token-symbol-container">
-                      {"Arweave Testnet"}
+                      {"Dojima Testnet"}
                     </StyledTokenName>
                   </Aligner>
                 </CurrencySelect>
